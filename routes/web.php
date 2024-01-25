@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // All listing
-Route::get('/', [ListingController::class,'index']);
+Route::get('/', [ListingController::class, 'index']);
 
 // Form to create new list
 Route::get('/listing/create', [ListingController::class, 'create']);
 
 // Store listing data
+Route::post('/listing', [ListingController::class, 'store']);
+
 // Show Edit Form
 Route::get('/listing/{listing}/edit', [ListingController::class, 'edit']);
 
@@ -28,7 +30,7 @@ Route::get('/listing/{listing}/edit', [ListingController::class, 'edit']);
 Route::put('/listing/{listing}', [ListingController::class, 'update']);
 
 // Single listing
-Route::get('/listing/{listing}', [ListingController::class,'show']);
+Route::get('/listing/{listing}', [ListingController::class, 'show']);
 
 // Common Resource Routes:
 // index - Show all listings

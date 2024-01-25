@@ -45,7 +45,7 @@ class ListingController extends Controller
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
-        DB::table('listings')->insert($formFields);
+        Listing::firstOrCreate($formFields);
 
         return redirect('/')->with('message', 'Listing created successfully!');
     }
