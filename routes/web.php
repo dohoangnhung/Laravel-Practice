@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 // All listing
 Route::get('/', [ListingController::class,'index']);
 
+// Form to create new list
+Route::get('/listing/create', [ListingController::class, 'create']);
+
+// Store listing data
+Route::post('/listing', [ListingController::class,'store']);
+
 // Single listing
 Route::get('/listing/{listing}', [ListingController::class,'show']);
 
