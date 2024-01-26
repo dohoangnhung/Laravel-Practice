@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Listing extends Model
 {
@@ -11,6 +12,21 @@ class Listing extends Model
 
     // The attributes that are mass assignable
     protected $fillable = ['title', 'user_id', 'company', 'location', 'website', 'email', 'description', 'tags'];
+    protected $keyType = 'string';
+    // This must be public
+    public $incrementing = false;
+
+    /**
+     * Model event to tell Laravel how to create an ID for your model when creating new record.
+     */
+    public static function boot() {
+        // If using old boot method, you have to call parent's boot method so it is not overwritten
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->id = Str::uuid();
+        });
+    }
 
     public function scopeFilter($query, array $filters) {
         if ($filters['tag'] ?? false) {
